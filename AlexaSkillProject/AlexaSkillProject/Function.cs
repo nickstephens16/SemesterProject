@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Alexa.NET.Request;
-using Alexa.NET.RequestType;
+//using Alexa.NET.RequestType;
 using Alexa.NET.Response;
 using Amazon.Lambda.Core;
 
@@ -24,7 +24,7 @@ namespace AlexaSkillProject
         /// <returns></returns>
         /// 
         private static HttpClient _httpClient;
-        public const string INVOCATION_NAME = "Country Info";
+        
 
         public Function()
         {
@@ -37,8 +37,8 @@ namespace AlexaSkillProject
             //response.Response = new ResponseBody();
             //response.Version = "1.0";
 
-            var RequestType = input.GetRequestType();
-            if (RequestType == typeof(IntentRequest))
+            var requestType = input.GetRequestType();
+            if (requestType == typeof(IntentRequest))
             {
                 var intentRequest = input.Request as IntentRequest;
                 var countryRequested = intentRequest.Intent.Slots["Country"].Value;
@@ -46,8 +46,8 @@ namespace AlexaSkillProject
                 return MakeSkillResponse(
                     $"The capital of {countryRequested} is ", true);
             }
- 
 
+            return response;
             //return input?.ToUpper();
         }
     }
