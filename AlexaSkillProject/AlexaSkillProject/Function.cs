@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 using Alexa.NET.Request;
 using Alexa.NET.RequestType;
 using Alexa.NET.Response;
@@ -30,10 +31,22 @@ namespace AlexaSkillProject
             _httpClient = new HttpClient();
         }
        
-        public SkillResponse FunctionHandler(SkillRequest input, ILambdaContext context)
+        public async Task<SkillResponse> FunctionHandler(SkillRequest input, ILambdaContext context)
         {
-            SkillResponse response = new SkillResponse();
-            response.Response = new ResponseBody();
+            //SkillResponse response = new SkillResponse();
+            //response.Response = new ResponseBody();
+            //response.Version = "1.0";
+
+            var RequestType = input.GetRequestType();
+            if (RequestType == typeof(IntentRequest))
+            {
+                var intentRequest = input.Request as IntentRequest;
+                var countryRequested = intentRequest.Intent.Slots["Country"].Value;
+
+                return MakeSkillResponse(
+                    $"The capital of {countryRequested} is ", true);
+            }
+ 
 
             //return input?.ToUpper();
         }
