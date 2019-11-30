@@ -11,6 +11,9 @@ using Amazon.Lambda.Core;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
+//Trying to create an Alexa skill that will give you the capital of the country when you ask Alexa.
+//I created the skill in the Alexa Developer Console and AWS Lambda
+
 namespace AlexaSkillProject
 {
     public class Function
